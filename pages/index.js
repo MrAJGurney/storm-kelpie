@@ -42,6 +42,35 @@ export default function Home() {
     responsePhraseFinalWordPronunciation &&
     responsePhraseFinalWordPronunciation.split(' ').slice(-2).join(' ');
 
+  const allWordsUsed = [
+    ...sanitisedInitialPhrase.split(' '),
+    ...sanitisedResponsePhrase.split(' '),
+  ];
+
+  const duplicateWordsInResponse = sanitisedResponsePhrase
+    .split(' ')
+    .reduce((duplicateWords, wordToCheck) => {
+      const totalOccurrences = allWordsUsed.reduce(
+        (occurrences, word) =>
+          word === wordToCheck ? occurrences + 1 : occurrences,
+        0
+      );
+
+      if (totalOccurrences > 1) {
+        duplicateWords.push(wordToCheck);
+      }
+
+      return duplicateWords;
+    }, [])
+    .sort()
+    .reduce((uniqueWords, word) => {
+      if (!uniqueWords.includes(word)) {
+        uniqueWords.push(word);
+      }
+
+      return uniqueWords;
+    }, []);
+
   return (
     <>
       <Head>
@@ -57,7 +86,7 @@ export default function Home() {
           type="text"
           value={responsePhrase}
           onChange={(event) => setResponsePhrase(event.target.value)}
-          placeholder={'Respond with a rhyme of the same number of words'}
+          placeholder={'complete the rhyme here'}
         />
       </section>
       <section>
@@ -72,8 +101,27 @@ export default function Home() {
               Response word count: <em>{responseWordCount}</em>
             </li>
             <li>
-              Same length:{' '}
-              <em>{initialWordCount === responseWordCount ? 'yes' : 'no'}</em>
+              <b>
+                {'Same length: '}
+                <em>{initialWordCount === responseWordCount ? 'yes' : 'no'}</em>
+              </b>
+            </li>
+          </ul>
+          <li>Must use unique words</li>
+          <ul>
+            <li>
+              Repeated words:{' '}
+              <em>
+                {duplicateWordsInResponse.length > 0
+                  ? duplicateWordsInResponse.join(', ')
+                  : 'none'}
+              </em>
+            </li>
+            <li>
+              <b>
+                {'Unique words: '}
+                <em>{false ? 'yes' : 'no'}</em>
+              </b>
             </li>
           </ul>
           <li>Must rhyme</li>
@@ -105,12 +153,14 @@ export default function Home() {
               </li>
             </ul>
             <li>
-              {'Rhyme: '}
-              <em>
-                {initialPhraseFinalWordRhyme === responsePhraseFinalWordRhyme
-                  ? 'yes'
-                  : 'no'}
-              </em>
+              <b>
+                {'Rhyme: '}
+                <em>
+                  {initialPhraseFinalWordRhyme === responsePhraseFinalWordRhyme
+                    ? 'yes'
+                    : 'no'}
+                </em>
+              </b>
             </li>
           </ul>
         </ul>
