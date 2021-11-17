@@ -71,6 +71,12 @@ export default function Home() {
       return uniqueWords;
     }, []);
 
+  const responsePhraseIsSameLength = initialWordCount === responseWordCount;
+  const responsePhraseHasOnlyUniqueWords =
+    duplicateWordsInResponse.length === 0;
+  const responsePhraseIsRhyme =
+    initialPhraseFinalWordRhyme === responsePhraseFinalWordRhyme;
+
   return (
     <>
       <Head>
@@ -103,7 +109,7 @@ export default function Home() {
             <li>
               <b>
                 {'Same length: '}
-                <em>{initialWordCount === responseWordCount ? 'yes' : 'no'}</em>
+                <em>{responsePhraseIsSameLength ? 'yes' : 'no'}</em>
               </b>
             </li>
           </ul>
@@ -120,7 +126,7 @@ export default function Home() {
             <li>
               <b>
                 {'Unique words: '}
-                <em>{false ? 'yes' : 'no'}</em>
+                <em>{responsePhraseHasOnlyUniqueWords ? 'yes' : 'no'}</em>
               </b>
             </li>
           </ul>
@@ -155,15 +161,23 @@ export default function Home() {
             <li>
               <b>
                 {'Rhyme: '}
-                <em>
-                  {initialPhraseFinalWordRhyme === responsePhraseFinalWordRhyme
-                    ? 'yes'
-                    : 'no'}
-                </em>
+                <em>{responsePhraseIsRhyme ? 'yes' : 'no'}</em>
               </b>
             </li>
           </ul>
         </ul>
+      </section>
+      <section>
+        <h2>
+          {responsePhraseIsSameLength &&
+          responsePhraseHasOnlyUniqueWords &&
+          responsePhraseIsRhyme
+            ? '🚣 success 🚣'
+            : '💀 sunk 💀'}
+        </h2>
+        <button onClick={() => setInitialPhrase(sentence())}>
+          generate new phrase
+        </button>
       </section>
     </>
   );
