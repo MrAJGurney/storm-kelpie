@@ -157,6 +157,9 @@ const main = () => {
 
   // Update page after values have been initialised
   updatePage({ call, response });
+
+  // Unhide page (previously hidden by "display: none;")
+  document.body.style.display = 'flex';
 };
 
 window.addEventListener('load', main);
