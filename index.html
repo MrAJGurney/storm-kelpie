@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>storm kelpies</title>
+    <script
+      type="module"
+      src="https://unpkg.com/txtgen@2.2.8/dist/txtgen.min.js"
+    ></script>
+    <script type="module" src="./index.js"></script>
+  </head>
+  <body
+    style="
+      background-color: black;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    "
+  >
+    <div style="background-color: white; padding: 10px; width: 75%">
+      <section>
+        <h2>Storm Kelpies</h2>
+        <p id="call-output"></p>
+      </section>
+      <section>
+        <h2>Your Response</h2>
+        <textarea
+          id="response-input"
+          style="resize: none; width: 100%"
+        ></textarea>
+      </section>
+      <section>
+        <h2>Score</h2>
+        <ul>
+          <li>Must have same word count</li>
+          <ul>
+            <li>Initial word count: <em id="word-count-call"></em></li>
+            <li>Response word count: <em id="word-count-response"></em></li>
+            <li>
+              <b> Same length: <em id="word-count-comparison"></em> </b>
+            </li>
+          </ul>
+          <li>Must use unique words</li>
+          <ul>
+            <li>Repeated words: <em id="duplicate-words"></em></li>
+            <li>
+              <b> Unique words: <em id="response-uniqeness-check"></em> </b>
+            </li>
+          </ul>
+          <li>Must rhyme</li>
+          <ul>
+            <li>Final word in call: <em id="final-word-call"></em></li>
+            <ul>
+              <li>
+                <a
+                  target="_blank"
+                  href="http://www.speech.cs.cmu.edu/cgi-bin/cmudict"
+                  >CMU pronouncing dictionary ending symbols: </a
+                ><em id="final-word-rhyme-call"></em>
+              </li>
+            </ul>
+            <li>Final word in response: <em id="final-word-response"></em></li>
+            <ul>
+              <li>
+                <a
+                  target="_blank"
+                  href="http://www.speech.cs.cmu.edu/cgi-bin/cmudict"
+                  >CMU pronouncing dictionary ending symbols:
+                </a>
+                <em id="final-word-rhyme-response"></em>
+              </li>
+            </ul>
+            <li>
+              <b> Rhyme: <em id="final-word-rhyme-comparison"></em> </b>
+            </li>
+          </ul>
+        </ul>
+      </section>
+      <section>
+        <h2 id="victory"></h2>
+        <button id="generate-new-phrase">generate new phrase</button>
+      </section>
+    </div>
+  </body>
+</html>
