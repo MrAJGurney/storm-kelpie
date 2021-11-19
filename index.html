@@ -22,19 +22,19 @@
   </head>
   <body id="background">
     <div id="game-outer-container">
+      <div id="header-container">
+        <h1>Storm Kelpies</h1>
+      </div>
       <div id="game-inner-container">
-        <section id="header-container">
-          <h1>Storm Kelpies</h1>
-        </section>
         <section id="call-container">
-          <h2>Storm Kelpie's Call</h2>
-          <div>
+          <div id="name-wrapper"><h2>Storm Kelpie's Call</h2></div>
+          <div id="text-wrapper">
             <p id="call-output"></p>
           </div>
         </section>
         <section id="response-container">
-          <h2>Your Response</h2>
-          <div>
+          <div id="name-wrapper"><h2>Your Response</h2></div>
+          <div id="text-wrapper">
             <textarea
               id="response-input"
               type="text"
@@ -44,60 +44,25 @@
           </div>
         </section>
         <section id="results-container">
-          <h2>Score</h2>
-          <ul>
-            <li>Must have same word count</li>
-            <ul>
-              <li>Initial word count: <em id="word-count-call"></em></li>
-              <li>Response word count: <em id="word-count-response"></em></li>
-              <li>
-                <b> Same length: <em id="word-count-comparison"></em> </b>
-              </li>
-            </ul>
-            <li>Must use unique words</li>
-            <ul>
-              <li>Repeated words: <em id="duplicate-words"></em></li>
-              <li>
-                <b>Unique words: <em id="response-uniqeness-check"></em> </b>
-              </li>
-            </ul>
-            <li>Must rhyme</li>
-            <ul>
-              <li>Final word in call: <em id="final-word-call"></em></li>
-              <ul>
-                <li>
-                  <a
-                    target="_blank"
-                    href="http://www.speech.cs.cmu.edu/cgi-bin/cmudict"
-                    >CMU pronouncing dictionary ending symbols: </a
-                  ><em id="final-word-rhyme-call"></em>
-                </li>
-              </ul>
-              <li>
-                Final word in response: <em id="final-word-response"></em>
-              </li>
-              <ul>
-                <li>
-                  <a
-                    target="_blank"
-                    href="http://www.speech.cs.cmu.edu/cgi-bin/cmudict"
-                    >CMU pronouncing dictionary ending symbols:
-                  </a>
-                  <em id="final-word-rhyme-response"></em>
-                </li>
-              </ul>
-              <li>
-                <b> Rhyme: <em id="final-word-rhyme-comparison"></em> </b>
-              </li>
-            </ul>
-          </ul>
+          <div>
+            <h3>word count</h3>
+            <p id="word-count-comparison"></p>
+          </div>
+          <div>
+            <h3>unique line</h3>
+            <p id="response-uniqeness-check"></p>
+          </div>
+          <div>
+            <h3>rhymes</h3>
+            <p id="final-word-rhyme-comparison"></p>
+          </div>
         </section>
         <section id="victory-container">
-          <h2 id="victory"></h2>
+          <h3 id="victory"></h3>
           <button id="generate-new-phrase">generate new phrase</button>
         </section>
-        <section id="footer-container"></section>
       </div>
+      <div id="footer-container"></div>
     </div>
   </body>
 </html>

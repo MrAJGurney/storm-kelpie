@@ -1,6 +1,15 @@
 import { dictionary } from 'https://unpkg.com/cmu-pronouncing-dictionary@3.0.0/index.js';
 
-const getSanitisedLine = (line) => line.replace(/[^a-z ]/gi, '').trim();
+const SYMBOLS = {
+  TICK: '✔',
+  CROSS: '✘',
+};
+
+const getSanitisedLine = (line) =>
+  line
+    .replace(/[^a-z ]/gi, '')
+    .replace(/\s\s+/g, ' ')
+    .trim();
 
 const getWordCount = (line) => (line === '' ? 0 : line.split(' ').length);
 
@@ -37,55 +46,6 @@ const getDuplicateWords = (sanitisedCall, sanitisedResponse) =>
 const updateCall = ({ call }) =>
   (document.getElementById('call-output').innerText = call);
 
-const updateWordCount = ({
-  callWordCount,
-  responseWordCount,
-  responseIsSameLength,
-}) => {
-  document.getElementById('word-count-call').innerText = callWordCount;
-  document.getElementById('word-count-response').innerText = responseWordCount;
-  document.getElementById('word-count-comparison').innerText =
-    responseIsSameLength ? 'yes' : 'no (alter response word count)';
-};
-
-const updateWordUniqueness = ({
-  duplicateWordsInResponse,
-  responseHasOnlyUniqueWords,
-}) => {
-  document.getElementById('duplicate-words').innerText =
-    duplicateWordsInResponse.join(', ');
-  document.getElementById('response-uniqeness-check').innerText =
-    responseHasOnlyUniqueWords
-      ? 'yes'
-      : 'no (replace duplicate words from response)';
-};
-
-const updateRhymeAccuracy = ({
-  callFinalWord,
-  responseFinalWord,
-  callRhymeSymbols,
-  responseRhymeSymbols,
-  responseIsRhyme,
-}) => {
-  document.getElementById('final-word-call').innerText = callFinalWord;
-  document.getElementById('final-word-response').innerText = responseFinalWord;
-  document.getElementById('final-word-rhyme-call').innerText = callRhymeSymbols;
-  document.getElementById('final-word-rhyme-response').innerText =
-    responseRhymeSymbols;
-  document.getElementById('final-word-rhyme-comparison').innerText =
-    responseIsRhyme ? 'yes' : 'no (try a different word)';
-};
-
-const updateVictoryCondition = ({
-  responseIsSameLength,
-  responseHasOnlyUniqueWords,
-  responseIsRhyme,
-}) =>
-  (document.getElementById('victory').innerText =
-    responseIsSameLength && responseHasOnlyUniqueWords && responseIsRhyme
-      ? '🚣 success 🚣'
-      : '💀 sunk 💀');
-
 const updatePage = ({ call, response }) => {
   updateCall({ call });
 
@@ -97,8 +57,8 @@ const updatePage = ({ call, response }) => {
   const callWordCount = getWordCount(sanitisedCall);
   const responseWordCount = getWordCount(sanitisedResponse);
   const responseIsSameLength = callWordCount === responseWordCount;
-
-  updateWordCount({ callWordCount, responseWordCount, responseIsSameLength });
+  document.getElementById('word-count-comparison').innerText =
+    responseIsSameLength ? SYMBOLS.TICK : SYMBOLS.CROSS;
 
   // Does the response duplicate any words
   const duplicateWordsInResponse = getDuplicateWords(
@@ -106,11 +66,8 @@ const updatePage = ({ call, response }) => {
     sanitisedResponse
   );
   const responseHasOnlyUniqueWords = duplicateWordsInResponse.length === 0;
-
-  updateWordUniqueness({
-    duplicateWordsInResponse,
-    responseHasOnlyUniqueWords,
-  });
+  document.getElementById('response-uniqeness-check').innerText =
+    responseHasOnlyUniqueWords ? SYMBOLS.TICK : SYMBOLS.CROSS;
 
   // Does the response rhyme with the call
   const callFinalWord = getFinalWord(sanitisedCall);
@@ -118,20 +75,13 @@ const updatePage = ({ call, response }) => {
   const callRhymeSymbols = getRhymeSymbols(callFinalWord);
   const responseRhymeSymbols = getRhymeSymbols(responseFinalWord);
   const responseIsRhyme = callRhymeSymbols === responseRhymeSymbols;
+  document.getElementById('final-word-rhyme-comparison').innerText =
+    responseIsRhyme ? SYMBOLS.TICK : SYMBOLS.CROSS;
 
-  updateRhymeAccuracy({
-    callFinalWord,
-    responseFinalWord,
-    callRhymeSymbols,
-    responseRhymeSymbols,
-    responseIsRhyme,
-  });
-
-  updateVictoryCondition({
-    responseIsSameLength,
-    responseHasOnlyUniqueWords,
-    responseIsRhyme,
-  });
+  document.getElementById('victory').innerText =
+    responseIsSameLength && responseHasOnlyUniqueWords && responseIsRhyme
+      ? '🚣 success 🚣'
+      : '💀 sunk 💀';
 };
 
 const main = () => {
