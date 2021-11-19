@@ -4,12 +4,14 @@
   --mid-blue: #4b8eb9;
   --dark-blue: #2f4692;
 
-  --big-border-radius: 20px;
+  --big-border-radius: 15px;
   --small-border-radius: 10px;
 
   --big-font-size: 2em;
   --medium-font-size: 1.5em;
   --small-font-size: 1.25em;
+
+  --container-height-multiplier: 1.25;
 }
 
 body#background {
@@ -45,7 +47,13 @@ h2 {
   background-color: var(--white);
   border-radius: var(--small-border-radius);
   font-size: var(--medium-font-size);
-  padding: var(--small-border-radius);
+  padding-left: var(--small-border-radius);
+  padding-right: var(--small-border-radius);
+  height: calc(var(--container-height-multiplier) * var(--medium-font-size));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 div#game-outer-container {
@@ -69,7 +77,7 @@ div#game-inner-container {
 section#header-container,
 section#footer-container {
   background-color: var(--dark-blue);
-  min-height: calc(1.5 * var(--medium-font-size));
+  min-height: calc(var(--container-height-multiplier) * var(--big-font-size));
   width: 100%;
 }
 
@@ -88,16 +96,22 @@ section#response-container > div {
   color: var(--mid-blue);
   background-color: var(--dark-blue);
   border-radius: var(--small-border-radius);
-  padding-top: var(--small-font-size);
+  padding-top: calc(0.5 * var(--medium-font-size) + var(--small-font-size));
   padding-bottom: var(--small-font-size);
   padding-left: var(--small-border-radius);
   padding-right: var(--small-border-radius);
-  width: 75%;
+  width: 85%;
+}
+
+section#call-container > h2,
+section#response-container > h2 {
+  transform: translateY(50%);
 }
 
 textarea#response-input {
   font-family: inherit; /* needs redeclared */
   font-size: inherit; /* needs redeclared */
+  line-height: inherit; /* needs redeclared */
 
   color: var(--mid-blue);
   background-color: var(--dark-blue);
