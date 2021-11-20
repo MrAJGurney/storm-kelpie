@@ -15,8 +15,35 @@ const getWordCount = (line) => (line === '' ? 0 : line.split(' ').length);
 
 const getFinalWord = (line) => line.split(' ').slice(-1)[0];
 
-const getRhymeSymbols = (word) =>
-  dictionary[word] && dictionary[word].split(' ').slice(-2).join(' ');
+const getRhymeSymbols = (word) => {
+  const possibleRhymes = [];
+
+  while (true) {
+    const suffix =
+      possibleRhymes.length === 0 ? '' : `(${possibleRhymes.length + 1})`;
+    const lookupWord = [word.toLowerCase(), suffix].join('');
+    const lookupWordResult = dictionary[lookupWord];
+
+    if (lookupWordResult) {
+      possibleRhymes.push(lookupWordResult.split(' ').slice(-2).join(' '));
+    } else {
+      break;
+    }
+  }
+
+  return possibleRhymes;
+};
+
+const rhymesSymbolsMatch = (rhymesSymbolsA, rhymesSymbolsB) => {
+  for (const rhymeSymbolA of rhymesSymbolsA) {
+    for (const rhymeSymbolB of rhymesSymbolsB) {
+      if (rhymeSymbolA === rhymeSymbolB) {
+        return true;
+      }
+    }
+  }
+  return false;
+};
 
 const getDuplicateWords = (sanitisedCall, sanitisedResponse) =>
   sanitisedResponse
@@ -72,9 +99,13 @@ const updatePage = ({ call, response }) => {
   // Does the response rhyme with the call
   const callFinalWord = getFinalWord(sanitisedCall);
   const responseFinalWord = getFinalWord(sanitisedResponse);
-  const callRhymeSymbols = getRhymeSymbols(callFinalWord);
-  const responseRhymeSymbols = getRhymeSymbols(responseFinalWord);
-  const responseIsRhyme = callRhymeSymbols === responseRhymeSymbols;
+  const callRhymesSymbols = getRhymeSymbols(callFinalWord);
+  const responseRhymesSymbols = getRhymeSymbols(responseFinalWord);
+  const responseIsRhyme = rhymesSymbolsMatch(
+    callRhymesSymbols,
+    responseRhymesSymbols
+  );
+
   document.getElementById('final-word-rhyme-comparison').innerText =
     responseIsRhyme ? SYMBOLS.TICK : SYMBOLS.CROSS;
 
