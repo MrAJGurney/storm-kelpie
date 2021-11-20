@@ -1,4 +1,5 @@
 :root {
+  /* Note: Colours have to be updated within the .svg file when changes are made */
   --white: #ffffff;
   --onahau: #b7fffe;
   --steel-blue: #4b8eb9;
@@ -16,6 +17,8 @@
 
   --normal-height-multiplier: 2em;
   --special-height-multiplier: 1.5em;
+
+  --icon-width: 30%;
 }
 
 body#background {
@@ -54,7 +57,8 @@ div#game-inner-container {
 
   background-color: var(--onahau);
   justify-content: space-between;
-  padding: var(--huge-border);
+  padding-left: var(--huge-border);
+  padding-right: var(--huge-border);
 }
 
 div#header-container,
@@ -86,6 +90,16 @@ section {
   align-items: center;
   justify-content: space-between;
 
+  width: 100%;
+}
+
+div.spacer {
+  /*
+   * This class mimics the extra space remaining after translating the call and
+   * response headers, so that components have an even vertical separation
+   */
+  font-size: var(--medium-font-size);
+  height: calc(var(--normal-height-multiplier) / 2);
   width: 100%;
 }
 
@@ -126,7 +140,7 @@ section#call-container > div#text-wrapper,
 section#response-container > div#text-wrapper {
   flex-direction: column;
   align-items: center;
-  justify-content: stretch;
+  justify-content: center;
   color: var(--steel-blue);
   background-color: var(--sapphire);
   border-radius: var(--small-border);
@@ -159,7 +173,7 @@ section#results-container {
 }
 
 section#results-container > div {
-  width: 30%;
+  width: var(--icon-width);
 }
 
 section#results-container > div > h3 {
@@ -181,9 +195,30 @@ section#results-container > div > p {
   align-items: center;
 
   font-size: var(--huge-font-size);
-  height: var(--special-height-multiplier);
   color: var(--onahau);
   background-color: var(--steel-blue);
   border-bottom-left-radius: var(--small-border);
   border-bottom-right-radius: var(--small-border);
+}
+
+/* I'm rotating the ENTIRE p tag, which is what's causing the weirdness... */
+
+section#game-state-container {
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+section#game-state-container > img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: var(--huge-font-size);
+  height: var(--special-height-multiplier);
+
+  background-color: var(--steel-blue);
+  border-radius: var(--small-border);
+
+  width: var(--icon-width);
 }

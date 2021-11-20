@@ -78,10 +78,15 @@ const updatePage = ({ call, response }) => {
   document.getElementById('final-word-rhyme-comparison').innerText =
     responseIsRhyme ? SYMBOLS.TICK : SYMBOLS.CROSS;
 
-  document.getElementById('victory').innerText =
+  document.getElementById('game-state-icon').style.transform =
     responseIsSameLength && responseHasOnlyUniqueWords && responseIsRhyme
-      ? '🚣 success 🚣'
-      : '💀 sunk 💀';
+      ? 'rotate(0deg)'
+      : 'rotate(180deg)';
+
+  document.getElementById('next-game-button').innerText =
+    responseIsSameLength && responseHasOnlyUniqueWords && responseIsRhyme
+      ? 'safe passage'
+      : 'shipwreck';
 };
 
 const main = () => {
@@ -96,10 +101,8 @@ const main = () => {
   });
 
   // Update page when new phrase is generated
-  const generateNewPhraseButton = document.getElementById(
-    'generate-new-phrase'
-  );
-  generateNewPhraseButton.addEventListener('click', () => {
+  const nextGameButton = document.getElementById('next-game-button');
+  nextGameButton.addEventListener('click', () => {
     call = txtgen.sentence();
     responseInputTextArea.value = '';
     updatePage({ call, response });
