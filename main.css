@@ -45,8 +45,7 @@ div#game-outer-container {
   background-color: var(--white);
   border-radius: var(--big-border);
   padding: var(--big-border);
-  width: 50%;
-  height: 90%;
+  width: 30em;
 }
 
 div#game-inner-container {
@@ -221,4 +220,35 @@ section#game-state-container > img {
   border-radius: var(--small-border);
 
   width: var(--icon-width);
+}
+
+section#next-game-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+div#next-game-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  font-size: var(--medium-font-size);
+  height: var(--normal-height-multiplier);
+  background-color: var(--sapphire);
+  color: var(--onahau);
+  border-radius: var(--small-border);
+  padding-left: var(--small-border);
+  padding-right: var(--small-border);
+}
+
+div#next-game-button:hover,
+div#next-game-button:focus {
+  color: var(--white);
+}
+
+div#next-game-button:active {
+  transform: scale(0.95);
 }
