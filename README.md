@@ -1,8 +1,13 @@
-# Readme
+# Readme <!-- omit in toc -->
 
+- [Background](#background)
+- [Story](#story)
+- [Gameplay](#gameplay)
+- [Requirements](#requirements)
+- [What would I do with more time](#what-would-i-do-with-more-time)
 ## Background
 
-A prototype game created for [@OtterKilted](https://mobile.twitter.com/otterkilted)'s 2021 game jam.
+A prototype game created for the [Kilted Otter Initiative](https://itch.io/jam/the-kilted-otter-initiative)'s 2021 game jam.
 
 Design and mentorship help from [hannah_osso_art](https://www.instagram.com/hannah_osso_art/).
 
@@ -26,3 +31,22 @@ Enter a response that matches three criteria:
 If you're stuck you can admit defeat with the "shipwreck" button and request a new call.
 
 If you match the three criteria you can request a new call to test your wits with the "safe passage" button.
+
+## Requirements
+
+Game tested on a 1080px high monitor using the chrome web browser on Ubuntu.
+
+Ideally it should work on any resolution, but responsive CSS is hard :'(
+
+## What would I do with more time
+
+- responsive layout
+- check accessibility
+  - for multiple device types
+  - for multiple resolutions
+  - for multiple browser
+- help/instruction screen
+- ongoing score tracker
+- animations for victory/defeat
+- more robost rhyme checker
+- better progress indicator

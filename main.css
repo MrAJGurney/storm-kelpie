@@ -9,29 +9,27 @@
   --big-border: 15px;
   --small-border: 10px;
 
-  --huge-font-size: 4em;
-  --big-font-size: 2em;
-  --medium-font-size: 1.5em;
-  --small-font-size: 1.25em;
-  --tiny-font-size: 1em;
+  --huge-font-size: 4rem;
+  --big-font-size: 3rem;
+  --medium-font-size: 1.5rem;
+  --small-font-size: 1.25rem;
+  --tiny-font-size: 1rem;
 
-  --normal-height-multiplier: 2em;
-  --special-height-multiplier: 1.5em;
+  --height-multiplier: 1.5;
 
   --icon-width: 30%;
 }
 
 body#background {
   display: none;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+
   text-align: center;
-
   background-color: black;
-
   width: 100vw;
   height: 100vh;
-
   font-family: 'Gloria Hallelujah', cursive;
   font-size: var(--small-font-size);
 }
@@ -40,24 +38,26 @@ div#game-outer-container {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  justify-content: flex-start;
+  justify-content: center;
+  flex-grow: 1;
 
   background-color: var(--white);
   border-radius: var(--big-border);
-  padding: var(--big-border);
-  width: 30em;
+  max-width: 40rem;
+
+  margin: var(--big-border);
 }
 
 div#game-inner-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
+  justify-content: space-around;
   flex-grow: 1;
 
   background-color: var(--onahau);
-  justify-content: space-between;
-  padding-left: var(--huge-border);
-  padding-right: var(--huge-border);
+  margin-right: var(--big-border);
+  margin-left: var(--big-border);
 }
 
 div#header-container,
@@ -71,63 +71,56 @@ div#footer-container {
   background-color: var(--sapphire);
   color: var(--white);
   font-size: var(--big-font-size);
-  height: var(--normal-height-multiplier);
+  height: calc(var(--height-multiplier) * var(--big-font-size));
+  margin-right: var(--big-border);
+  margin-left: var(--big-border);
 }
 
 div#header-container {
+  margin-top: var(--big-border);
   border-top-left-radius: var(--big-border);
   border-top-right-radius: var(--big-border);
 }
 
 div#footer-container {
+  margin-bottom: var(--big-border);
   border-bottom-left-radius: var(--big-border);
   border-bottom-right-radius: var(--big-border);
 }
 
-section {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  width: 100%;
-}
-
-div.spacer {
-  /*
-   * This class mimics the extra space remaining after translating the call and
-   * response headers, so that components have an even vertical separation
-   */
-  font-size: var(--medium-font-size);
-  height: calc(var(--normal-height-multiplier) / 2);
-  width: 100%;
-}
-
 section#call-container,
 section#response-container {
+  display: flex;
   flex-direction: column;
   align-items: stretch;
   justify-content: center;
+
+  margin-right: var(--big-border);
+  margin-left: var(--big-border);
+  margin-top: calc(var(--height-multiplier) * var(--medium-font-size));
 }
 
 section#call-container > div#name-wrapper,
 section#response-container > div#name-wrapper {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-align: center;
 
+  text-align: center;
   transform: translateY(50%);
 }
 
 section#call-container > div > h2,
 section#response-container > div > h2 {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-align: center;
 
+  text-align: center;
   font-size: var(--medium-font-size);
-  height: var(--normal-height-multiplier);
+  height: calc(var(--height-multiplier) * var(--medium-font-size));
   color: var(--sapphire);
   background-color: var(--white);
   border-radius: var(--small-border);
@@ -148,10 +141,9 @@ section#response-container > div#text-wrapper {
   padding-left: var(--small-border);
   padding-right: var(--small-border);
   flex-grow: 1;
-  /* width: 100%; */
 }
 
-textarea#response-input {
+section#response-container > div#text-wrapper > textarea#response-input {
   font-family: inherit; /* needs redeclared */
   font-size: inherit; /* needs redeclared */
   line-height: inherit; /* needs redeclared */
@@ -167,8 +159,14 @@ textarea#response-input {
 }
 
 section#results-container {
+  display: flex;
   flex-direction: row;
+  align-items: center;
   justify-content: space-between;
+
+  margin-right: var(--big-border);
+  margin-left: var(--big-border);
+  margin-top: calc(var(--height-multiplier) * var(--medium-font-size));
 }
 
 section#results-container > div {
@@ -181,7 +179,7 @@ section#results-container > div > h3 {
   align-items: center;
 
   font-size: var(--tiny-font-size);
-  height: var(--normal-height-multiplier);
+  height: calc(var(--height-multiplier) * var(--tiny-font-size));
   color: var(--sapphire);
   background-color: var(--white);
   border-top-left-radius: var(--small-border);
@@ -200,43 +198,53 @@ section#results-container > div > p {
   border-bottom-right-radius: var(--small-border);
 }
 
-/* I'm rotating the ENTIRE p tag, which is what's causing the weirdness... */
-
 section#game-state-container {
+  display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+
+  height: calc(var(--special-height-multiplier) * var(--small-font-size));
+  margin-right: var(--big-border);
+  margin-left: var(--big-border);
+  margin-top: calc(var(--height-multiplier) * var(--medium-font-size));
 }
 
 section#game-state-container > img {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  font-size: var(--huge-font-size);
-  height: var(--special-height-multiplier);
 
   background-color: var(--steel-blue);
   border-radius: var(--small-border);
 
+  height: calc(var(--big-font-size) * var(--height-multiplier));
   width: var(--icon-width);
 }
 
 section#next-game-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+
   text-align: center;
+  margin-right: var(--big-border);
+  margin-left: var(--big-border);
+  margin-top: calc(var(--height-multiplier) * var(--medium-font-size));
+  margin-bottom: calc(var(--height-multiplier) * var(--medium-font-size));
 }
 
-div#next-game-button {
+section#next-game-container > div#next-game-button {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-align: center;
 
-  font-size: var(--medium-font-size);
-  height: var(--normal-height-multiplier);
+  text-align: center;
+  font-size: var(--big-font-size);
+  height: calc(var(--height-multiplier) * var(--big-font-size));
   background-color: var(--sapphire);
   color: var(--onahau);
   border-radius: var(--small-border);
@@ -244,11 +252,11 @@ div#next-game-button {
   padding-right: var(--small-border);
 }
 
-div#next-game-button:hover,
-div#next-game-button:focus {
+section#next-game-container > div#next-game-button:hover,
+section#next-game-container > div#next-game-button:focus {
   color: var(--white);
 }
 
-div#next-game-button:active {
+section#next-game-container > div#next-game-button:active {
   transform: scale(0.95);
 }
