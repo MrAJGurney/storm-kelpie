@@ -22,9 +22,9 @@
 
 body#background {
   display: none;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
-  align-items: center;
+  align-items: stretch;
 
   text-align: center;
   background-color: black;
@@ -32,6 +32,23 @@ body#background {
   height: 100vh;
   font-family: 'Gloria Hallelujah', cursive;
   font-size: var(--small-font-size);
+  background-image: url('resources/wave-background.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  overflow: hidden;
+}
+
+div.background-character {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 30%;
+}
+
+div.background-character > img {
+  height: 80vh;
 }
 
 div#game-outer-container {
@@ -39,11 +56,10 @@ div#game-outer-container {
   flex-direction: column;
   align-items: stretch;
   justify-content: center;
-  flex-grow: 1;
 
   background-color: var(--white);
   border-radius: var(--big-border);
-  max-width: 40rem;
+  width: 40%;
 
   margin: var(--big-border);
 }
